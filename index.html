@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0b14" />
+  <meta name="description" content="A sleek, modern stopwatch with lap tracking." />
+  <title>Chrono — Aesthetic Stopwatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Chrono home">
+        <span class="brand-icon">◷</span>
+        <span>chrono<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="live-status">
+        <span class="status-dot"></span>
+        <span id="statusText">READY TO BEGIN</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">TIME, BEAUTIFULLY MEASURED</p>
+      <h1>Every second<br /> <span>counts.</span></h1>
+      <p class="subtitle">
+        Find your rhythm. Track your progress.<br class="mobile-break" />
+        Make every moment matter.
+      </p>
+    </section>
+
+    <section class="stopwatch-card" aria-label="Stopwatch">
+      <div class="timer-heading">
+        <span class="section-label">STOPWATCH</span>
+        <span class="precision-label">
+          <span class="precision-dot"></span> 1/100 SECOND
+        </span>
+      </div>
+
+      <div class="timer-stage" id="timerStage">
+        <div class="timer-glow"></div>
+
+        <svg class="progress-ring" viewBox="0 0 300 300"
+             aria-hidden="true">
+          <circle class="ring-track"
+                  cx="150" cy="150" r="137" />
+          <circle class="ring-progress"
+                  id="ringProgress"
+                  cx="150" cy="150" r="137" />
+        </svg>
+
+        <div class="timer-content">
+          <span class="timer-caption" id="timerCaption">YOUR TIME</span>
+
+          <div class="time-display" role="timer"
+               aria-label="Elapsed time">
+            <span id="minutes">00</span><span class="time-colon">:</span><span id="seconds">00</span>
+            <span class="time-dot">.</span><span class="centiseconds" id="centiseconds">00</span>
+          </div>
+
+          <div class="timer-divider"></div>
+
+          <div class="timer-meta">
+            <span class="meta-icon">◷</span>
+            <span id="elapsedLabel">Ready when you are</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="resetBtn" class="control-btn secondary"
+                type="button" aria-label="Reset stopwatch">
+          <span class="btn-icon">↺</span>
+          <span>Reset</span>
+        </button>
+
+        <button id="startBtn" class="control-btn primary"
+                type="button">
+          <span class="btn-icon" id="startIcon">▶</span>
+          <span id="startText">Start timer</span>
+        </button>
+
+        <button id="lapBtn" class="control-btn secondary"
+                type="button" disabled aria-label="Record lap">
+          <span class="btn-icon">⌁</span>
+          <span>Lap</span>
+        </button>
+      </div>
+
+      <div class="shortcut-hint">
+        <span>SPACE</span> Start / Pause
+        <span class="hint-separator">·</span>
+        <span>L</span> Lap
+        <span class="hint-separator">·</span>
+        <span>R</span> Reset
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Lap statistics">
+      <article class="stat-card">
+        <div class="stat-top">
+          <span class="stat-label">TOTAL LAPS</span>
+          <span class="stat-symbol">⌁</span>
+        </div>
+        <div class="stat-value" id="totalLaps">00</div>
+        <div class="stat-foot">Recorded splits</div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-top">
+          <span class="stat-label">BEST LAP</span>
+          <span class="stat-symbol best-symbol">↗</span>
+        </div>
+        <div class="stat-value stat-time" id="bestLap">--:--.--</div>
+        <div class="stat-foot">Your fastest split</div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-top">
+          <span class="stat-label">AVERAGE LAP</span>
+          <span class="stat-symbol">∿</span>
+        </div>
+        <div class="stat-value stat-time" id="averageLap">--:--.--</div>
+        <div class="stat-foot">Across all laps</div>
+      </article>
+    </section>
+
+    <section class="laps-section">
+      <div class="laps-heading">
+        <div>
+          <p class="section-label">YOUR SESSION</p>
+          <h2>Lap history <span id="lapCountBadge">0</span></h2>
+        </div>
+
+        <button class="clear-btn" id="clearLapsBtn" type="button"
+                disabled>Clear laps</button>
+      </div>
+
+      <div class="lap-table">
+        <div class="lap-table-header">
+          <span>LAP</span>
+          <span>SPLIT TIME</span>
+          <span>TOTAL TIME</span>
+        </div>
+
+        <div id="lapsList" class="laps-list" aria-live="polite">
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">◷</div>
+            <p>No laps recorded yet</p>
+            <span>Your journey starts with the first lap.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <span class="footer-mark">◷</span> MADE FOR YOUR MOMENT
+      </div>
+      <span>Precision in every second.</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
